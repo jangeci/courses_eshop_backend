@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a588a2f0cfe632f8c1537c4e82a79db2",
+    "content-hash": "f3e4fa88d48de02aa17bd47d9c32a64d",
     "packages": [
         {
             "name": "brick/math",
@@ -856,16 +856,16 @@
         },
         {
             "name": "encore/laravel-admin",
-            "version": "dev-master",
+            "version": "v1.8.19",
             "source": {
                 "type": "git",
                 "url": "https://github.com/z-song/laravel-admin.git",
-                "reference": "67c441eb78ecc5437e59775d89770cd9c2cb1e05"
+                "reference": "6c292ebb5efa886fa4776d86e975180608505946"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/67c441eb78ecc5437e59775d89770cd9c2cb1e05",
-                "reference": "67c441eb78ecc5437e59775d89770cd9c2cb1e05",
+                "url": "https://api.github.com/repos/z-song/laravel-admin/zipball/6c292ebb5efa886fa4776d86e975180608505946",
+                "reference": "6c292ebb5efa886fa4776d86e975180608505946",
                 "shasum": ""
             },
             "require": {
@@ -885,7 +885,6 @@
                 "intervention/image": "Required to handling and manipulation upload images (~2.3).",
                 "spatie/eloquent-sortable": "Required to built orderable gird."
             },
-            "default-branch": true,
             "type": "library",
             "extra": {
                 "laravel": {
@@ -925,9 +924,9 @@
             ],
             "support": {
                 "issues": "https://github.com/z-song/laravel-admin/issues",
-                "source": "https://github.com/z-song/laravel-admin/tree/master"
+                "source": "https://github.com/z-song/laravel-admin/tree/v1.8.19"
             },
-            "time": "2023-02-03T14:34:41+00:00"
+            "time": "2022-05-24T03:49:38+00:00"
         },
         {
             "name": "fruitcake/php-cors",
@@ -8442,9 +8441,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "encore/laravel-admin": 20
-    },
+    "stability-flags": [],
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
