@@ -2,18 +2,16 @@
 
 namespace App\Admin\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Models\CourseType;
 use Encore\Admin\Controllers\AdminController;
 use Encore\Admin\Form;
-use Encore\Admin\Grid;
-use Encore\Admin\Show;
 use Encore\Admin\Layout\Content;
+use Encore\Admin\Show;
 use Encore\Admin\Tree;
-use Illuminate\Http\Request;
 
 class CourseTypeController extends AdminController
 {
+    //for showing tree form of the menus
     public function index(Content $content)
     {
         $tree = new Tree(new CourseType());
@@ -34,7 +32,8 @@ class CourseTypeController extends AdminController
         return $show;
     }
 
-    protected function form(){
+    protected function form()
+    {
         $form = new Form(new CourseType());
         $form->select('parent_id', __('Parent category'))->options((new CourseType())::selectOptions());
         $form->text('title', __('Title'));
