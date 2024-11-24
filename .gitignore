@@ -3,6 +3,8 @@
 /public/build
 /public/hot
 /public/storage
+/public/uploads/files
+/public/uploads/images
 /storage/*.key
 /storage/pail
 /storage/uploads
