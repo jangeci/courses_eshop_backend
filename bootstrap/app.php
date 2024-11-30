@@ -4,6 +4,7 @@ use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\HttpFoundation\Response;
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -20,17 +21,19 @@ return Application::configure(basePath: dirname(__DIR__))
         //
     })
     ->withExceptions(function (Exceptions $exceptions) {
-        $exception = $exceptions[0];
-        $statusCode = $exception->getStatusCode() ?: 400;
+        $exceptions->respond(function (Response $response) {
+//            if ($response->getStatusCode() === 419) {
+//                return back()->with([
+//                    'message' => 'The page expired, please try again.',
+//                ]);
+//            }
 
-        $response = [
-            'error' => $exception->getMessage(),
-            'status_code' => $statusCode,
-        ];
+            $statusCode = $response->getStatusCode() ?: 500;
+            $myresponse = [
+                'error' => $response,
+                'status_code' => $statusCode,
+            ];
 
-        if (app()->environment('local')) {
-            $response['trace'] = $exception->getTrace();
-        }
-
-        return response($response, $statusCode);
+            return response($myresponse, $statusCode);
+        });
     })->create();
