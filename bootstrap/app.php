@@ -22,18 +22,12 @@ return Application::configure(basePath: dirname(__DIR__))
     })
     ->withExceptions(function (Exceptions $exceptions) {
         $exceptions->respond(function (Response $response) {
-//            if ($response->getStatusCode() === 419) {
-//                return back()->with([
-//                    'message' => 'The page expired, please try again.',
-//                ]);
-//            }
+            if ($response->getStatusCode() === 419) {
+                return back()->with([
+                    'message' => 'The page expired, please try again.',
+                ]);
+            }
 
-            $statusCode = $response->getStatusCode() ?: 500;
-            $myresponse = [
-                'error' => $response,
-                'status_code' => $statusCode,
-            ];
-
-            return response($myresponse, $statusCode);
+            return $response;
         });
     })->create();
