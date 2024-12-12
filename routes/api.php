@@ -14,6 +14,7 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/courses', [CourseController::class, 'courseList']);
         Route::get('/course-detail', [CourseController::class, 'courseDetail']);
         Route::get('/course-lessons', [LessonController::class, 'courseLessons']);
+        Route::get('/lesson-detail', [LessonController::class, 'lessonDetail']);
         Route::post('/logout', [UserController::class, 'logout']);
     });
 
