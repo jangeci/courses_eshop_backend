@@ -34,7 +34,7 @@ class LessonController extends AdminController
         $grid->column('name', __('Name'));
         $grid->column('thumbnail', __('Thumbnail'))->image('', 50, 50);
         $grid->column('description', __('Description'));
-        $grid->column('video', __('Video'));
+//        $grid->column('video', __('Video'));
         $grid->column('created_at', __('Created at'));
         $grid->column('updated_at', __('Updated at'));
 
@@ -80,7 +80,7 @@ class LessonController extends AdminController
         $form->table('video', __('Videos'), function ($form) {
             $form->text('name')->rules('required');
             $form->image('thumbnail')->uniqueName()->rules('required');
-            $form->file('url')->rules('required');
+            $form->file('url')->uniqueName()->rules('required');
         });
 
         $form->display('created_at', __('Created at'));
