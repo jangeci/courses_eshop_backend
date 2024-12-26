@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\LessonController;
+use App\Http\Controllers\Api\PaymentController;
 use App\Http\Controllers\Api\UserController;
 use App\Http\Controllers\Api\VideoController;
 use Illuminate\Support\Facades\Route;
@@ -16,9 +17,11 @@ Route::group(['namespace' => 'Api'], function () {
         Route::get('/course-detail', [CourseController::class, 'courseDetail']);
         Route::get('/course-lessons', [LessonController::class, 'courseLessons']);
         Route::get('/lesson-detail', [LessonController::class, 'lessonDetail']);
-        Route::post('/logout', [UserController::class, 'logout']);
+        Route::post('/checkout', [PaymentController::class, 'checkout']);
+//        Route::post('/logout', [UserController::class, 'logout']);
     });
 
     Route::get('/video-stream/{fileName}', [VideoController::class, 'streamVideo']);
+    Route::any('/web-go-hooks', [PaymentController::class, 'webGoHooks']);
 });
 
