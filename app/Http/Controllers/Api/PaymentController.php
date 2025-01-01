@@ -28,7 +28,7 @@ class PaymentController extends Controller
             if (empty($course)) {
                 return response()->json(
                     [
-                        'code' => 200,
+                        'code' => 204,
                         'msg' => 'No course found',
                         'data' => ''
                     ]
@@ -51,7 +51,7 @@ class PaymentController extends Controller
             if (!empty($orderRes)) {
                 return response()->json(
                     [
-                        'code' => 200,
+                        'code' => 409, //conflict
                         'msg' => 'Order already exists',
                         'data' => ''
                     ]

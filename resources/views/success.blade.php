@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,11 +17,8 @@
 </section>
 </body>
 <script type='text/javascript'>
-
-    function postMessage(){
-
+    function postMessage() {
         Pay.postMessage('success');
     }
-
 </script>
 </html>

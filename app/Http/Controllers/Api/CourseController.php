@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Course;
+use App\Models\Order;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -43,5 +44,20 @@ class CourseController extends Controller
                 'msg' => 'Server internal error',
                 'data' => $th->getMessage()], 500);
         }
+    }
+
+    public function coursesBought(Request $request)
+    {
+        $user = $request->user();
+        $map = [];
+        $map['status'] = 1;
+        $map['user_token'] = $user->token;
+        $courseIds = Order::where($map)->select('course_id')->get();
+        $result = Course::whereIn('id', $courseIds)->select('name', 'id', 'thumbnail', 'lesson_count', 'price')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'The courses you have bought',
+            'data' => $result], 200);
     }
 }
