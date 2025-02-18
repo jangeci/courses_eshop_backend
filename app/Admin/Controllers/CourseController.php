@@ -94,6 +94,7 @@ class CourseController extends AdminController
         $form->select('user_token', __('Teacher'))->options($user);
         $form->display('created_at', __('Created at'));
         $form->display('updated_at', __('Updated at'));
+        $form->switch('recommended', __('Recommended'));
         return $form;
     }
 }

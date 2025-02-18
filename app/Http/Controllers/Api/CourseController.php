@@ -60,4 +60,25 @@ class CourseController extends Controller
             'msg' => 'The courses you have bought',
             'data' => $result], 200);
     }
+
+    public function coursesRecommended()
+    {
+        $result = Course::where('recommended', 1)->select('name', 'id', 'thumbnail', 'lesson_count', 'price')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'Recommended courses',
+            'data' => $result], 200);
+    }
+
+    public function coursesSearch(Request $request)
+    {
+        $search = $request->search;
+        $result = Course::where('name', 'like', '%' . $search . '%')->select('name', 'id', 'thumbnail', 'lesson_count', 'price')->get();
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'Searched courses',
+            'data' => $result], 200);
+    }
 }
