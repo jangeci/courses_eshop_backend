@@ -28,7 +28,7 @@ class UserController extends Controller
                     'open_id' => 'required',
                     'name' => 'required',
                     'email' => 'required',
-                    'password' => 'nullable|min:6',
+//                    'password' => 'nullable|min:6',
                 ]);
 
             if ($validateUser->fails()) {
