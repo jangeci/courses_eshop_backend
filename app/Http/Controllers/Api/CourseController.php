@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Models\Course;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class CourseController extends Controller
@@ -79,6 +80,30 @@ class CourseController extends Controller
         return response()->json([
             'code' => 200,
             'msg' => 'Searched courses',
+            'data' => $result], 200);
+    }
+
+    public function authorCourseList(Request $request)
+    {
+        $token = $request->token;
+
+        $result = Course::where('user_token', '=', $token)->select('name', 'id', 'thumbnail', 'lesson_count', 'price', 'score')->get();;
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'Author courses',
+            'data' => $result], 200);
+    }
+
+    public function courseAuthor(Request $request)
+    {
+        $token = $request->token;
+
+        $result = User::where('token', '=', $token)->select('token', 'name', 'id', 'avatar', 'job', 'description')->first();;
+
+        return response()->json([
+            'code' => 200,
+            'msg' => 'Course author',
             'data' => $result], 200);
     }
 }
