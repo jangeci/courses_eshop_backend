@@ -6,9 +6,11 @@ use App\Models\Course;
 use App\Models\CourseType;
 use App\Models\User;
 use Encore\Admin\Controllers\AdminController;
+use Encore\Admin\Facades\Admin;
 use Encore\Admin\Form;
 use Encore\Admin\Grid;
 use Encore\Admin\Show;
+use Illuminate\Support\Facades\DB;
 
 class CourseController extends AdminController
 {
@@ -28,12 +30,18 @@ class CourseController extends AdminController
     {
         $grid = new Grid(new Course());
 
+        if (Admin::user()->isRole('teacher')) {
+            $token = Admin::user()->token;
+            $grid->model()->where('user_token', $token);
+        }
+
         $grid->column('id', __('Id'));
-        $grid->column('user_token', __('Teacher'))->display(function ($user_token) {
-            return User::where('token', $user_token)->value('name');
-        });
+        $grid->column('user_token', __('Teachers'))->display(
+            function ($token) {
+                return DB::table("admin_users")->where('token', $token)->value('username');
+            });
         $grid->column('name', __('Name'));
-        $grid->column('thumbnail', __('Thumbnail'))->image('', 50,50);
+        $grid->column('thumbnail', __('Thumbnail'))->image('', 50, 50);
         $grid->column('description', __('Description'));
         $grid->column('type_id', __('Type id'));
         $grid->column('price', __('Price'));
@@ -90,8 +98,15 @@ class CourseController extends AdminController
         $form->number('lesson_count', __('Lesson count'));
         $form->number('video_length', __('Video length'));
         //for who is posting course
-        $user = User::pluck('name', 'token');
-        $form->select('user_token', __('Teacher'))->options($user);
+        if (Admin::user()->isRole('teacher')) {
+            $token = Admin::user()->token;
+            $username = Admin::user()->username;
+            $result = User::pluck('name', 'token');
+            $form->select('user_token', __('Teacher'))->options([$token => $username])->default($token)->readonly();
+        } else {
+            $users = DB::table('admin_users')->pluck('name', 'token');
+            $form->select('user_token', __('Teacher'))->options($users);
+        }
         $form->display('created_at', __('Created at'));
         $form->display('updated_at', __('Updated at'));
         $form->switch('recommended', __('Recommended'));
